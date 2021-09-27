@@ -10,6 +10,7 @@ import java.util.*
 @JsonIgnoreProperties(ignoreUnknown = true)
 data class ResponseError(
     val timestamp: Date,
-    val message: String,
-    val detail: String
+    val status: String,
+    val error: String,
+    val path: String
 )

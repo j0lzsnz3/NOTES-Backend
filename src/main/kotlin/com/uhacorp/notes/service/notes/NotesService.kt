@@ -14,7 +14,7 @@ interface NotesService {
     fun createNotes(request: NotesRequest): Notes?
     fun getAllNotes(): List<Notes>
     fun updateNotes(request: NotesRequest): Notes?
-    fun deleteNotes(id: Long)
+    fun deleteNotes(id: Long): Boolean
 }
 
 @Component
@@ -29,8 +29,7 @@ class NotesServiceImpl : NotesService {
     override fun createNotes(request: NotesRequest): Notes? {
         return try {
             val notes = request.toNotes()
-            notesRepository.save(notes)
-            notes
+            return notesRepository.save(notes)
         } catch (e: Exception) {
             e.printStackTrace()
             null
@@ -52,8 +51,14 @@ class NotesServiceImpl : NotesService {
         }
     }
 
-    override fun deleteNotes(id: Long) {
-        notesRepository.deleteById(id)
+    override fun deleteNotes(id: Long): Boolean {
+        return try {
+            notesRepository.deleteById(id)
+            true
+        } catch(e: Exception) {
+            e.printStackTrace()
+            false
+        }
     }
 
     /**
