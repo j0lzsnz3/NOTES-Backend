@@ -74,7 +74,7 @@ class UserServiceImpl : UserService {
         imageFile: MultipartFile
     ): Boolean {
         return try {
-            val folder = "/Users/admin/Documents/photos/"
+            val folder = "/Users/moka/Documents/photos/"
             val bytes = imageFile.bytes
             val path = Paths.get(folder.plus(imageFile.originalFilename))
             Files.write(path, bytes)
